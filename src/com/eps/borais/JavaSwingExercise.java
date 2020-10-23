@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +28,7 @@ public class JavaSwingExercise extends JFrame implements ActionListener {
     private JButton save;
     private JButton delete;
     private JTable table;
+    private JTableHeader tableHeader;
     private JScrollPane sp;
 
     private String genders[] = { "Male", "Female"};
@@ -41,29 +43,35 @@ public class JavaSwingExercise extends JFrame implements ActionListener {
         c = getContentPane();
         c.setLayout(null);
 
+        title = new JLabel("Input Form");
+        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setSize(300, 30);
+        title.setLocation(300, 30);
+        c.add(title);
+
         lastName = new JLabel("Last Name:");
         lastName.setFont(new Font("Arial", Font.PLAIN, 20));
-        lastName.setSize(100, 20);
+        lastName.setSize(125, 20);
         lastName.setLocation(100, 100);
         c.add(lastName);
 
         tLastName = new JTextField();
         tLastName.setFont(new Font("Arial", Font.PLAIN, 15));
         tLastName.setSize(190, 20);
-        tLastName.setLocation(200, 100);
+        tLastName.setLocation(215, 100);
         tLastName.setEnabled(false);
         c.add(tLastName);
 
         firstName = new JLabel("First Name:");
         firstName.setFont(new Font("Arial", Font.PLAIN, 20));
-        firstName.setSize(100, 20);
+        firstName.setSize(125, 20);
         firstName.setLocation(100, 150);
         c.add(firstName);
 
         tFirstName = new JTextField();
         tFirstName.setFont(new Font("Arial", Font.PLAIN, 15));
         tFirstName.setSize(190, 20);
-        tFirstName.setLocation(200, 150);
+        tFirstName.setLocation(215, 150);
         tFirstName.setEnabled(false);
         c.add(tFirstName);
 
@@ -76,7 +84,7 @@ public class JavaSwingExercise extends JFrame implements ActionListener {
         gCbx = new JComboBox(genders);
         gCbx.setFont(new Font("Arial", Font.PLAIN, 20));
         gCbx.setSize(100, 25);
-        gCbx.setLocation(200, 200);
+        gCbx.setLocation(215, 200);
         gCbx.setEnabled(false);
         c.add(gCbx);
 
@@ -89,7 +97,7 @@ public class JavaSwingExercise extends JFrame implements ActionListener {
         tDob = new JTextField();
         tDob.setFont(new Font("Arial", Font.PLAIN, 15));
         tDob.setSize(190, 20);
-        tDob.setLocation(200, 250);
+        tDob.setLocation(215, 250);
         tDob.setEnabled(false);
         c.add(tDob);
 
@@ -97,6 +105,8 @@ public class JavaSwingExercise extends JFrame implements ActionListener {
         addNew.setFont(new Font("Arial", Font.PLAIN, 15));
         addNew.setSize(100, 50);
         addNew.setLocation(100, 280);
+        addNew.setBackground(Color.GREEN);
+        addNew.setForeground(Color.BLACK);
         addNew.addActionListener(this);
         c.add(addNew);
 
@@ -105,6 +115,8 @@ public class JavaSwingExercise extends JFrame implements ActionListener {
         save.setSize(100, 50);
         save.setLocation(215, 280);
         save.setEnabled(false);
+        save.setForeground(Color.BLACK);
+        save.setBackground(Color.BLUE);
         save.addActionListener(this);
         c.add(save);
 
@@ -127,6 +139,10 @@ public class JavaSwingExercise extends JFrame implements ActionListener {
                 delete.setEnabled(true);
             }
         });
+        tableHeader = table.getTableHeader();
+        tableHeader.setBackground(Color.GRAY);
+        tableHeader.setForeground(Color.WHITE);
+
         sp = new JScrollPane(table);
         sp.setSize(600,200);
         sp.setLocation(100, 350);
@@ -137,6 +153,8 @@ public class JavaSwingExercise extends JFrame implements ActionListener {
         delete.setSize(100, 50);
         delete.setLocation(335, 280);
         delete.setEnabled(false);
+        delete.setForeground(Color.BLACK);
+        delete.setBackground(Color.RED);
         delete.addActionListener(ae -> {
             if(table.getSelectedRow() != -1) {
                 dataModel.removeRow(table.getSelectedRow());
@@ -193,6 +211,7 @@ public class JavaSwingExercise extends JFrame implements ActionListener {
             tDob.setEnabled(false);
             tDob.setText("");
             save.setEnabled(false);
+            delete.setEnabled(false);
         }
     }
 
